@@ -14,16 +14,8 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 8089,
       host: true,
-      proxy: createProxy({
-        // 显式配置代理规则
-        '/api': {
-          target: 'http://api.hehonglei.cn',
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '/music'),
-          secure: false // Vercel可能需要这个配置
-        }
-      })
-    },
+      proxy: createProxy(viteEnv.VITE_PROXY),
+      },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
